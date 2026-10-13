@@ -1,6 +1,7 @@
 pub mod configuration;
 pub mod routes;
 pub mod startup;
+pub mod telemetry;
 
 // A type that implements FromRequest trait is called an Extractor
 // An extractor can be used as a parameter of a handler function
