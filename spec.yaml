@@ -1,0 +1,17 @@
+name: zero2prod
+region: nyc3
+services:
+  - name: zero2prod
+    dockerfile_path: Dockerfile
+    source_dir: .
+    github:
+      branch: main
+      deploy_on_push: true
+      repo: asa
+    health_check:
+      http_path: /health_check
+    http_port: 8000
+    instance_count: 1
+    instance_slug_size: basic-xxs
+    routes:
+      - path: /
