@@ -1,5 +1,5 @@
 use std::{net::TcpListener, sync::LazyLock};
-use secrecy::{ExposeSecret, SecretBox};
+use secrecy::{SecretBox};
 use sqlx::{AssertSqlSafe, Connection, PgConnection, PgPool};
 use uuid::Uuid;
 use zero2prod::{configuration::{DatabaseSettings, get_configuration}, startup::run, telemetry::{get_subscriber, init_subscriber}};
@@ -50,7 +50,7 @@ pub async fn configure_database(config: &DatabaseSettings) -> PgPool {
         host: "127.0.0.1".to_string()
     };
 
-    let mut connection = PgConnection::connect(&maintenance_settings.connection_string().expose_secret())
+    let mut connection = PgConnection::connect_with(&maintenance_settings.connect_options())
         .await
         .expect("Failed to connect to Postgres");
 
@@ -61,7 +61,7 @@ pub async fn configure_database(config: &DatabaseSettings) -> PgPool {
         .expect("Failed to create database.");
 
     // Migrate database
-    let connection_pool = PgPool::connect(&config.connection_string().expose_secret())
+    let connection_pool = PgPool::connect_with(config.connect_options())
         .await
         .expect("Failed to connect to Postgres");
     sqlx::migrate!("./migrations")
