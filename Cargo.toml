@@ -24,7 +24,14 @@ tracing-actix-web = "0.7.25"
 tracing-bunyan-formatter = "0.3.11"
 tracing-log = "0.2.0"
 tracing-subscriber = { version = "0.3.23", features = ["registry", "env-filter"] }
+unicode-segmentation = "1.13.3"
 uuid = { version = "1.28.0", features = ["v4"] }
+validator = { version = "0.21.0", features = ["derive"] }
 
 [dev-dependencies]
+claims = "0.8.0"
+fake = "5.1.0"
+quickcheck = "1.1.0"
+quickcheck_macros = "1.2.0"
+rand = "0.10.3"
 reqwest = "0.13.5"
