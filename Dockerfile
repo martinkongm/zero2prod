@@ -1,5 +1,5 @@
 # Builder stage
-FROM rust:1.94.1-slim AS builder
+FROM rust:1.94.1-slim-bookworm AS builder
 
 WORKDIR /app
 RUN apt update && apt install lld clang -y
